@@ -31,7 +31,7 @@ useful for demos and offline use. `api` mode swaps in a real model with one flag
 ## Quick start
 
 ```bash
-pip install reportlab            # add 'anthropic' only for api mode
+pip install reportlab            # add 'anthropic'  api mode
 
 # generate a sample schedule (optional)
 python generate_sample_xer.py sample_schedule.xer
