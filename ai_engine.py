@@ -1,17 +1,3 @@
-#!/usr/bin/env python3
-"""AI narrative engine for P6 schedule analysis.
-
-Turns the verified facts from analyze.py into a written project-controls
-narrative. Two modes:
-
-    mock  - generates the narrative locally from the real metrics (no API key).
-            Useful for demos and offline use.
-    api   - sends the facts to a language model (Anthropic by default) with a
-            controlled prompt and returns the model's narrative.
-
-The prompt deliberately passes only computed facts, not raw schedule rows, so
-the model reasons over verified numbers rather than inventing them.
-"""
 
 from __future__ import annotations
 import json
@@ -36,9 +22,9 @@ def build_user_prompt(facts: dict) -> str:
     )
 
 
-# ---------------------------------------------------------------------------
+
 # API mode
-# ---------------------------------------------------------------------------
+
 
 def narrate_api(facts: dict, model: str = "claude-sonnet-4-20250514") -> str:
     """Generate the narrative with the Anthropic API. Requires ANTHROPIC_API_KEY."""
@@ -54,9 +40,9 @@ def narrate_api(facts: dict, model: str = "claude-sonnet-4-20250514") -> str:
     return "".join(block.text for block in resp.content if block.type == "text")
 
 
-# ---------------------------------------------------------------------------
-# Mock mode  (rule-based, reads the real numbers)
-# ---------------------------------------------------------------------------
+
+# Mock mode 
+
 
 def narrate_mock(facts: dict) -> str:
     f = facts
@@ -146,9 +132,9 @@ def narrate_mock(facts: dict) -> str:
     return "\n".join(parts)
 
 
-# ---------------------------------------------------------------------------
+
 # Public entry point
-# ---------------------------------------------------------------------------
+
 
 def generate_narrative(facts: dict, mode: str = "mock",
                        model: str = "claude-sonnet-4-20250514") -> str:
